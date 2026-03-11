@@ -1,10 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import Logo from "@/assets/app-logo.png";
 
 const navLinks = [
   { name: "Features", href: "#features" },
@@ -13,16 +15,7 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4">
@@ -31,20 +24,17 @@ export default function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={cn(
-          "relative flex items-center justify-between w-full max-w-2xl h-14 px-4 rounded-full border transition-all duration-300",
-          isScrolled
-            ? "bg-background/80 border-border shadow-lg backdrop-blur-xl"
-            : "bg-transparent border-transparent",
+          "relative flex items-center justify-between w-full max-w-2xl h-14 px-4 rounded-full border transition-all duration-300 bg-background/80 border-border shadow-lg backdrop-blur-xl",
         )}
       >
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 z-20">
-          <div className="w-7 h-7 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
-            <span className="font-bold text-primary text-xs">RL</span>
-          </div>
-          <span className="font-bold text-foreground text-sm hidden sm:block">
-            RepoLens
-          </span>
+        {/* Logo Section - Updated */}
+        <Link href="/" className="flex items-center z-20">
+          <Image
+            src={Logo}
+            alt="RepoLens Logo"
+            className="h-18 w-auto"
+            priority
+          />
         </Link>
 
         {/* Desktop Center Links */}
@@ -124,7 +114,6 @@ export default function Navbar() {
   );
 }
 
-// Helper
 function cn(...classes: (string | boolean | undefined)[]) {
   return classes.filter(Boolean).join(" ");
 }
