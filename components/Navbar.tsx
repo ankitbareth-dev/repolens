@@ -10,8 +10,8 @@ import Logo from "@/assets/app-logo.png";
 
 const navLinks = [
   { name: "Features", href: "#features" },
+  { name: "How It Works", href: "#howItWorks" },
   { name: "Pricing", href: "#pricing" },
-  { name: "Docs", href: "#" },
 ];
 
 export default function Navbar() {
@@ -52,13 +52,6 @@ export default function Navbar() {
 
         {/* Right Side Actions */}
         <div className="flex items-center gap-2 z-20">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="hidden sm:flex text-muted-foreground hover:text-foreground"
-          >
-            Sign In
-          </Button>
           <Button
             size="sm"
             className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-md shadow-primary/20"
