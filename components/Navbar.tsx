@@ -19,21 +19,21 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4">
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-3 pt-[18px]">
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={cn(
-          "relative flex items-center justify-between w-full max-w-2xl h-14 px-4 rounded-full border transition-all duration-300 bg-background/80 border-border shadow-lg backdrop-blur-xl",
+          "relative flex items-center justify-between w-full max-w-2xl h-16 px-6 rounded-full border transition-all duration-300 bg-background/80 border-border shadow-lg backdrop-blur-xl overflow-visible",
         )}
       >
         {/* Logo Section */}
-        <Link href="/" className="flex items-center z-20">
+        <Link href="/" className="flex items-center z-20 shrink-0 pt-1.5">
           <Image
             src={Logo}
             alt="RepoLens Logo"
-            className="h-9 w-auto" // Kept standard height to fit navbar
+            className="h-[100px] w-auto"
             priority
           />
         </Link>
@@ -55,14 +55,14 @@ export default function Navbar() {
         </div>
 
         {/* Right Side Actions */}
-        <div className="flex items-center gap-1 z-20">
-          <ThemeToggle />
+        <div className="flex items-center gap-2 z-20">
           <Button
             size="sm"
             className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-md shadow-primary/20"
           >
             Get Started
           </Button>
+          <ThemeToggle />
 
           {/* Mobile Menu Trigger */}
           <button
@@ -78,7 +78,7 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu Dropdown (Pill Style) */}
+      {/* Mobile Menu Dropdown */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -86,7 +86,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-20 left-4 right-4 z-40 p-4 rounded-2xl border border-border bg-background/95 backdrop-blur-xl shadow-2xl md:hidden"
+            className="fixed top-[108px] left-4 right-4 z-40 p-4 rounded-2xl border border-border bg-background/95 backdrop-blur-xl shadow-2xl md:hidden"
           >
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
