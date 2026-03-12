@@ -25,7 +25,7 @@ export default function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={cn(
-          "relative flex items-center justify-between w-full max-w-2xl h-16 px-6 rounded-full border transition-all duration-300 bg-background/80 border-border shadow-lg backdrop-blur-xl overflow-visible",
+          "relative flex items-center justify-between w-full max-w-2xl h-14 px-4 md:px-6 rounded-full border transition-all duration-300 bg-background/80 border-border shadow-lg backdrop-blur-xl overflow-visible",
         )}
       >
         {/* Logo Section */}
@@ -55,10 +55,11 @@ export default function Navbar() {
         </div>
 
         {/* Right Side Actions */}
-        <div className="flex items-center gap-2 z-20">
+        <div className="flex items-center gap-1 md:gap-2 z-20">
+          {/* Hide Get Started button on mobile */}
           <Button
             size="sm"
-            className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-md shadow-primary/20"
+            className="hidden md:flex rounded-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-md shadow-primary/20"
           >
             Get Started
           </Button>
@@ -67,7 +68,7 @@ export default function Navbar() {
           {/* Mobile Menu Trigger */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden ml-1 p-2 text-muted-foreground"
+            className="md:hidden p-2 text-muted-foreground"
           >
             {isMobileMenuOpen ? (
               <X className="w-5 h-5" />
@@ -86,7 +87,8 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-[108px] left-4 right-4 z-40 p-4 rounded-2xl border border-border bg-background/95 backdrop-blur-xl shadow-2xl md:hidden"
+            // Reduced top position: 18px (padding) + 56px (nav h-14) + 2px (gap) = 76px
+            className="fixed top-[76px] left-4 right-4 z-40 p-4 rounded-2xl border border-border bg-background/95 backdrop-blur-xl shadow-2xl md:hidden"
           >
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
@@ -100,10 +102,6 @@ export default function Navbar() {
                 </Link>
               ))}
               <hr className="border-border my-2" />
-              <div className="flex items-center justify-between px-2 py-2">
-                <span className="text-sm text-muted-foreground">Theme</span>
-                <ThemeToggle />
-              </div>
               <Button className="w-full bg-primary">Get Started</Button>
             </div>
           </motion.div>
