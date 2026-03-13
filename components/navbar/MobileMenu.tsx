@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { navLinks } from "@/lib/constants";
+import { navLinks } from "@/components/navbar/data";
 
 interface MobileMenuProps {
   isOpen: boolean;

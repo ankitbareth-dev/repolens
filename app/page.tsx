@@ -4,7 +4,7 @@ import Hero from "@/components/hero/Hero";
 import HowItWorks from "@/components/HowItWorks";
 import Navbar from "@/components/navbar/Navbar";
 import Pricing from "@/components/Pricing";
-import ProblemSection from "@/components/Problem-Section";
+import ProblemSection from "@/components/problem-section/Problem-Section";
 
 export default function Home() {
   return (

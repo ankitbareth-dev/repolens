@@ -2,7 +2,7 @@
 
 import { memo } from "react";
 import Link from "next/link";
-import { navLinks } from "@/lib/constants";
+import { navLinks } from "@/components/navbar/data";
 import { cn } from "@/lib/utils";
 
 const NavLinks = memo(() => {
