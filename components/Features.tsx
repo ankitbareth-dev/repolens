@@ -8,7 +8,11 @@ import {
   Cpu,
   Folder,
   FileCode,
+  ShoppingCart,
+  CreditCard,
+  Box,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -35,9 +39,8 @@ const features = [
   {
     Icon: Layers,
     title: "Architecture Visualization",
-    description:
-      "Instantly generate interactive folder trees and dependency graphs. See how modules connect without reading every file.",
-    className: "md:col-span-2 md:row-span-2", // Large card
+    description: "",
+    className: "md:col-span-2 md:row-span-2 flex flex-col items-start",
     visual: "architecture",
   },
   {
@@ -61,100 +64,195 @@ const features = [
     title: "Data Flow Mapping",
     description:
       "Visualize how data moves from API endpoints to the UI state, highlighting critical paths.",
-    className: "md:col-span-2 md:row-span-1",
+    // Updated to take full width
+    className: "md:col-span-3 md:row-span-1",
     visual: "flow",
   },
 ];
 
-// Mock visual components to make cards feel alive
 const Visuals = {
-  // UPDATED: Realistic File Tree + Graph Visual
   architecture: () => (
-    <div className="absolute inset-0 flex items-end justify-center p-6 opacity-40 group-hover:opacity-60 transition-opacity">
-      {/* Mini Window Container */}
-      <div className="relative w-full h-[200px] bg-muted/20 rounded-xl border border-border overflow-hidden flex">
-        {/* Left: File Tree */}
-        <div className="w-1/3 p-3 border-r border-border bg-background/30 font-mono text-[10px] space-y-1.5">
-          <div className="flex items-center gap-1 text-foreground/80">
-            <Folder className="w-3 h-3 text-primary" /> src
+    <div className="absolute bottom-0 left-0 right-0 h-[85%] p-4 sm:p-6 opacity-50 group-hover:opacity-90 transition-all duration-500">
+      <div className="relative w-full h-full bg-secondary/40 dark:bg-card/60 backdrop-blur-md rounded-xl border border-border overflow-hidden shadow-2xl flex flex-col">
+        {/* Editor Title Bar */}
+        <div className="flex items-center gap-2 px-3 py-2 border-b border-border bg-muted/50 dark:bg-background/20 shrink-0">
+          <div className="flex gap-1.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-destructive/60" />
+            <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
+            <div className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
           </div>
-          <div className="pl-3 flex items-center gap-1 text-foreground/60">
-            <Folder className="w-3 h-3" /> components
-          </div>
-          <div className="pl-6 flex items-center gap-1 text-primary">
-            <FileCode className="w-3 h-3" /> button.tsx
-          </div>
-          <div className="pl-6 flex items-center gap-1 text-foreground/60">
-            <FileCode className="w-3 h-3" /> card.tsx
-          </div>
-          <div className="pl-3 flex items-center gap-1 text-foreground/60">
-            <Folder className="w-3 h-3" /> lib
-          </div>
-          <div className="pl-6 flex items-center gap-1 text-foreground/60">
-            <FileCode className="w-3 h-3" /> utils.ts
-          </div>
+          <span className="flex-1 text-center text-[9px] text-muted-foreground font-mono tracking-wide">
+            ecommerce-store/
+          </span>
         </div>
 
-        {/* Right: Connection Graph */}
-        <div className="flex-1 relative bg-background/10">
-          {/* Nodes */}
-          <div className="absolute top-[30%] left-[20%] w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_hsl(var(--primary))]" />
-          <div className="absolute top-[60%] left-[40%] w-2 h-2 rounded-full bg-muted-foreground" />
-          <div className="absolute top-[30%] right-[20%] w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_hsl(var(--primary))]" />
+        {/* Main Content: Split View */}
+        <div className="flex flex-1 overflow-hidden">
+          {/* LEFT: E-commerce File Tree */}
+          <div className="w-[45%] border-r border-border bg-background/30 p-3 overflow-hidden font-mono text-[10px] space-y-1.5">
+            <div className="flex items-center gap-1.5 text-foreground font-semibold">
+              <Folder className="w-3.5 h-3.5 text-primary shrink-0" /> src
+            </div>
 
-          {/* Lines connecting nodes */}
-          <svg className="absolute inset-0 w-full h-full">
-            <line
-              x1="22%"
-              y1="32%"
-              x2="42%"
-              y2="60%"
-              stroke="hsl(var(--border))"
-              strokeWidth="1"
-            />
-            <line
-              x1="42%"
-              y1="60%"
-              x2="78%"
-              y2="34%"
-              stroke="hsl(var(--primary)/0.5)"
-              strokeWidth="1"
-              strokeDasharray="2 2"
-            />
-          </svg>
+            <div className="relative pl-4">
+              <div className="absolute left-[7px] top-1 bottom-0 w-px h-full bg-border" />
+              <div className="flex items-center gap-1.5 text-muted-foreground relative z-10">
+                <div className="w-2 h-2 bg-muted rounded-sm" />
+                <Folder className="w-3 h-3 shrink-0" /> components
+              </div>
 
-          {/* Label */}
-          <div className="absolute bottom-2 left-2 text-[8px] text-muted-foreground uppercase tracking-wider">
-            Dependencies
+              <div className="relative pl-4 mt-1">
+                <div className="absolute left-[7px] top-1 bottom-0 w-px h-full bg-border" />
+                <div className="flex items-center gap-1.5 py-0.5 px-1 rounded bg-primary/20 border border-primary/40 text-primary relative z-10 shadow-sm shadow-primary/10">
+                  <FileCode className="w-3 h-3 shrink-0" /> ProductCard.tsx
+                </div>
+              </div>
+            </div>
+
+            <div className="relative pl-4 mt-1">
+              <div className="absolute left-[7px] top-1 bottom-0 w-px h-full bg-border" />
+              <div className="flex items-center gap-1.5 text-muted-foreground relative z-10">
+                <div className="w-2 h-2 bg-muted rounded-sm" />
+                <Folder className="w-3 h-3 shrink-0" /> lib
+              </div>
+              <div className="relative pl-4 mt-1">
+                <div className="flex items-center gap-1.5 text-muted-foreground/80 relative z-10">
+                  <FileCode className="w-3 h-3 shrink-0" /> stripe.ts
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT: Logical Dependency Graph (Grid Based for Consistency) */}
+          <div className="flex-1 relative bg-muted/10 p-2 overflow-hidden">
+            {/* SVG Layer: Absolute positioned to fill the grid area */}
+            <svg
+              className="absolute inset-0 w-full h-full pointer-events-none z-0"
+              viewBox="0 0 200 200"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <defs>
+                <marker
+                  id="arrowhead"
+                  markerWidth="6"
+                  markerHeight="6"
+                  refX="5"
+                  refY="3"
+                  orient="auto"
+                >
+                  <path
+                    d="M0,0 L0,6 L6,3 z"
+                    fill="hsl(var(--muted-foreground) / 0.6)"
+                  />
+                </marker>
+              </defs>
+
+              {/* 1. ProductList (Top) -> ProductCard (Center) */}
+              <path
+                d="M 100 60 L 100 85"
+                stroke="hsl(var(--primary) / 0.6)"
+                strokeWidth="2"
+                fill="none"
+                markerEnd="url(#arrowhead)"
+              />
+
+              {/* 2. ProductCard (Center) -> useCart (Right) */}
+              <path
+                d="M 145 100 L 165 100"
+                stroke="hsl(var(--muted-foreground) / 0.4)"
+                strokeWidth="2"
+                fill="none"
+                markerEnd="url(#arrowhead)"
+              />
+
+              {/* 3. Stripe API (Bottom) -> ProductCard (Center) */}
+              <path
+                d="M 100 140 L 100 115"
+                stroke="hsl(var(--primary) / 0.6)"
+                strokeWidth="2"
+                fill="none"
+                strokeDasharray="3 2"
+                markerEnd="url(#arrowhead)"
+              />
+            </svg>
+
+            {/* Nodes Layer: CSS Grid for perfect alignment with SVG coordinates */}
+            <div className="relative z-10 w-full h-full grid grid-cols-3 grid-rows-3 gap-2 place-items-center">
+              {/* Row 1: Parent Component */}
+              <div className="col-start-2 row-start-1 px-2 py-1 rounded bg-secondary border border-border text-[8px] text-muted-foreground font-mono shadow-sm flex items-center gap-1">
+                <Layers className="w-2.5 h-2.5" /> ProductList
+              </div>
+
+              {/* Row 2: Main Component + Hook */}
+              <div className="col-start-2 row-start-2 h-10 w-24 rounded-md bg-primary/20 border border-primary/50 flex items-center justify-center gap-1.5 shadow-lg shadow-primary/10 backdrop-blur-sm">
+                <Box className="w-3.5 h-3.5 text-primary" />
+                <span className="text-[9px] font-bold text-primary">
+                  ProductCard
+                </span>
+              </div>
+
+              <div className="col-start-3 row-start-2 px-2 py-1 rounded bg-secondary border border-border text-[8px] text-muted-foreground font-mono shadow-sm flex items-center gap-1">
+                <ShoppingCart className="w-2.5 h-2.5 text-primary" /> useCart
+              </div>
+
+              {/* Row 3: Data Source */}
+              <div className="col-start-2 row-start-3 px-2 py-1 rounded bg-muted border border-border text-[8px] text-muted-foreground font-mono shadow-sm flex items-center gap-1">
+                <CreditCard className="w-2.5 h-2.5" /> api/stripe
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   ),
+
   chat: () => (
     <div className="absolute bottom-4 right-4 left-4 space-y-2 opacity-30 group-hover:opacity-50 transition-opacity">
       <div className="w-3/4 h-2 rounded bg-muted-foreground/20" />
       <div className="w-1/2 h-2 rounded bg-primary/40 ml-auto" />
     </div>
   ),
+
   tech: () => (
     <div className="absolute bottom-4 right-4 flex gap-1 opacity-30 group-hover:opacity-50 transition-opacity">
       <div className="w-6 h-6 rounded bg-muted border border-border" />
       <div className="w-6 h-6 rounded bg-muted border border-border" />
     </div>
   ),
+
+  // UPDATED: Visual positioned strictly at the bottom to avoid text overlap
   flow: () => (
-    <div className="absolute inset-0 flex items-center justify-center opacity-30 group-hover:opacity-50 transition-opacity p-4">
-      <div className="flex items-center gap-4 w-full">
-        <div className="h-8 w-1 bg-gradient-to-b from-primary to-transparent rounded-full" />
-        <div
-          className="flex-1 h-0.5 bg-border"
-          style={{
-            background:
-              "linear-gradient(90deg, hsl(var(--primary)/0.5), transparent)",
-          }}
-        />
-        <div className="h-4 w-4 rounded border border-primary rotate-45" />
+    <div className="absolute bottom-0 left-0 right-0 h-1/2 opacity-30 group-hover:opacity-50 transition-opacity p-8 flex items-center justify-center">
+      <div className="flex items-center justify-between w-full max-w-3xl gap-4">
+        {/* Step 1: User */}
+        <div className="flex flex-col items-center gap-2">
+          <div className="h-10 w-10 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center">
+            <div className="h-3 w-3 rounded-full bg-primary" />
+          </div>
+          <span className="text-[10px] text-muted-foreground">User Click</span>
+        </div>
+
+        {/* Line */}
+        <div className="flex-1 h-0.5 bg-gradient-to-r from-primary/50 to-muted" />
+
+        {/* Step 2: API */}
+        <div className="flex flex-col items-center gap-2">
+          <div className="h-10 w-10 rounded-lg bg-muted border border-border flex items-center justify-center">
+            <GitBranch className="w-4 h-4 text-muted-foreground" />
+          </div>
+          <span className="text-[10px] text-muted-foreground">API Route</span>
+        </div>
+
+        {/* Line */}
+        <div className="flex-1 h-0.5 bg-gradient-to-r from-muted to-primary/50" />
+
+        {/* Step 3: DB */}
+        <div className="flex flex-col items-center gap-2">
+          <div className="h-10 w-10 rounded bg-secondary border border-border flex items-center justify-center">
+            <Layers className="w-4 h-4 text-muted-foreground" />
+          </div>
+          <span className="text-[10px] text-muted-foreground">Database</span>
+        </div>
       </div>
     </div>
   ),
@@ -206,12 +304,12 @@ export default function Features() {
               >
                 {/* Content Layer (Top) */}
                 <div className="relative z-10">
-                  <div className="inline-flex items-center justify-center p-2 rounded-lg bg-muted border border-border mb-4">
-                    <feature.Icon className="w-5 h-5 text-primary" />
+                  <div className="flex items-center gap-3 mb-2">
+                    <feature.Icon className="w-5 h-5 text-primary shrink-0" />
+                    <h3 className="text-xl font-semibold text-foreground">
+                      {feature.title}
+                    </h3>
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
-                    {feature.title}
-                  </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
                     {feature.description}
                   </p>
@@ -229,8 +327,4 @@ export default function Features() {
       </motion.div>
     </section>
   );
-}
-
-function cn(...classes: (string | boolean | undefined)[]) {
-  return classes.filter(Boolean).join(" ");
 }
