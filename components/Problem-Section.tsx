@@ -31,31 +31,28 @@ const problems = [
     title: "Lost in the Logic",
     description:
       "Hours spent tracing function calls and deciphering complex control flows, only to end up more confused than when you started.",
-    color: "red",
   },
   {
     icon: FileWarning,
     title: "Outdated Docs",
     description:
       "The README hasn't been updated in years. Comments lie. You're forced to rely on tribal knowledge or guesswork.",
-    color: "amber",
   },
   {
     icon: Hourglass,
     title: "Slow Onboarding",
     description:
       "New developers take weeks to become productive. Valuable time is lost in knowledge transfer instead of building.",
-    color: "blue",
   },
 ];
 
 export default function ProblemSection() {
   return (
-    <section className="relative w-full py-32 overflow-hidden">
-      {/* 1. Premium "Dot Grid" Background */}
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,hsl(var(--border))_1px,transparent_1px)] bg-[length:24px_24px] opacity-30" />
+    <section className="relative w-full py-20 md:py-32 overflow-hidden">
+      {/* Dot Grid Background  */}
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,hsl(var(--muted-foreground)/0.15)_1px,transparent_1px)] bg-[length:24px_24px] dark:bg-[radial-gradient(circle_at_center,hsl(var(--border))_1px,transparent_1px)]" />
 
-      {/* Radial fade overlay to clean up edges */}
+      {/* Radial fade overlay */}
       <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,hsl(var(--background))_70%)]" />
 
       <motion.div
@@ -66,19 +63,18 @@ export default function ProblemSection() {
         viewport={{ once: true, amount: 0.2 }}
       >
         {/* Header */}
-        <div className="text-center mb-20 max-w-3xl mx-auto">
+        <div className="text-center mb-12 md:mb-20 max-w-3xl mx-auto">
           <motion.p
             variants={itemVariants}
-            className="text-sm font-mono text-primary mb-4 tracking-widest uppercase"
+            className="text-xs md:text-sm font-mono text-primary mb-3 md:mb-4 tracking-widest uppercase"
           >
             The Friction
           </motion.p>
           <motion.h2
             variants={itemVariants}
-            className="text-4xl md:text-5xl font-bold tracking-tight text-foreground"
+            className="text-2xl sm:text-3xl md:text-5xl font-bold leading-tight tracking-tight text-foreground"
           >
-            Development Should Be
-            <br />
+            Development Should Be{" "}
             <span className="text-muted-foreground">
               Creative, Not Detective Work
             </span>
@@ -93,7 +89,7 @@ export default function ProblemSection() {
               variants={itemVariants}
               className="group relative p-[1px] rounded-2xl transition-all duration-500"
             >
-              {/* 2. Dynamic Gradient Border & Glow */}
+              {/* Gradient Border & Glow */}
               <div
                 className={cn(
                   "absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500",
@@ -103,9 +99,9 @@ export default function ProblemSection() {
               />
 
               {/* Card Content Wrapper */}
-              <div className="relative h-full bg-card/90 backdrop-blur-xl rounded-2xl p-8 overflow-hidden border border-border/50 group-hover:border-primary/30 transition-colors">
-                {/* 3. Large Background Number (Visual Anchor) */}
-                <div className="absolute -bottom-4 -right-1 text-[120px] font-black leading-none text-foreground/[0.02] group-hover:text-foreground/[0.04] transition-colors select-none">
+              <div className="relative h-full bg-muted/30 dark:bg-card/90 backdrop-blur-xl rounded-2xl p-6 md:p-8 overflow-hidden border border-border dark:border-border/50 group-hover:border-primary/30 transition-colors">
+                {/* Large Background Number  */}
+                <div className="absolute -bottom-4 -right-1 text-[100px] md:text-[120px] font-black leading-none text-muted-foreground/10 dark:text-foreground/[0.03] group-hover:text-muted-foreground/20 dark:group-hover:text-foreground/[0.05] transition-colors select-none">
                   0{index + 1}
                 </div>
 
@@ -114,14 +110,14 @@ export default function ProblemSection() {
 
                 <div className="relative z-10">
                   {/* Icon Container */}
-                  <div className="inline-flex items-center justify-center p-3 rounded-xl bg-muted border border-border mb-6 group-hover:bg-background transition-colors">
-                    <problem.icon className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
+                  <div className="inline-flex items-center justify-center p-3 rounded-xl bg-background dark:bg-muted border border-border mb-4 md:mb-6 group-hover:bg-background transition-colors">
+                    <problem.icon className="w-5 h-5 md:w-6 md:h-6 text-muted-foreground group-hover:text-primary transition-colors" />
                   </div>
 
-                  <h3 className="text-xl font-semibold text-foreground mb-3">
+                  <h3 className="text-lg md:text-xl font-semibold leading-snug text-foreground mb-2 md:mb-3">
                     {problem.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
                     {problem.description}
                   </p>
                 </div>
